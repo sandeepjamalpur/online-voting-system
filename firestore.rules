@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net: Default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isSuperAdmin() {
+      return isSignedIn() &&
+        (request.auth.token.email == 'jamalpursandeep41@gmail.com' && request.auth.token.email_verified == true);
+    }
+
+    function isAdmin() {
+      return isSignedIn() &&
+        (isSuperAdmin() || exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
+    }
+
+    match /admins/{adminId} {
+      allow read: if isSignedIn();
+      allow write: if isSuperAdmin() && isValidId(adminId);
+    }
+
+    match /settings/{settingsId} {
+      allow read: if resource != null;
+      allow write: if isValidId(settingsId);
+    }
+
+    match /elections/{electionId} {
+      allow get: if true;
+      allow list: if resource != null;
+      allow create, update, delete: if isValidId(electionId);
+
+      match /candidates/{candidateId} {
+        allow get: if true;
+        allow list: if resource != null;
+        allow write: if isValidId(candidateId);
+      }
+
+      match /voters/{voterId} {
+        allow get: if true;
+        allow list: if resource != null;
+        allow write: if isValidId(voterId);
+      }
+
+      match /votes/{voteId} {
+        allow get: if true;
+        allow list: if resource != null;
+        allow create, update, delete: if isValidId(voteId);
+      }
+    }
+  }
+}

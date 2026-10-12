@@ -1,0 +1,151 @@
+import React, { useId } from 'react';
+
+interface VoteEaseLogoProps {
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  showText?: boolean;
+  className?: string;
+  textClassName?: string;
+  inverted?: boolean; // For dark background
+}
+
+export const VoteEaseLogo: React.FC<VoteEaseLogoProps> = ({
+  size = 'md',
+  showText = true,
+  className = '',
+  textClassName = '',
+  inverted = false,
+}) => {
+  const uid = useId().replace(/:/g, '');
+
+  // Dimensions based on size preset
+  const sizeMap = {
+    xs: { icon: 'w-6 h-6', text: 'text-lg', height: 'h-6' },
+    sm: { icon: 'w-9 h-9', text: 'text-2xl', height: 'h-9' },
+    md: { icon: 'w-11 h-11', text: 'text-3xl', height: 'h-11' },
+    lg: { icon: 'w-16 h-16', text: 'text-4xl', height: 'h-16' },
+    xl: { icon: 'w-24 h-24', text: 'text-5xl', height: 'h-24' },
+  };
+
+  const currentSize = sizeMap[size];
+
+  // Website signature dark green color
+  const darkGreen = '#0B3B2C';
+
+  return (
+    <div className={`inline-flex items-center gap-2.5 select-none ${className}`}>
+      {/* Iconic Graphic Emblem */}
+      <div className={`relative shrink-0 ${currentSize.icon}`}>
+        <svg
+          viewBox="0 0 500 420"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-full object-contain overflow-visible"
+          aria-hidden="true"
+        >
+          <defs>
+            {/* Sweeping Circular Gradient Arch in Dark Forest Green & Vibrant Emerald */}
+            <linearGradient
+              id={`${uid}-archGrad`}
+              x1="100"
+              y1="280"
+              x2="390"
+              y2="120"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stopColor="#0B3B2C" />
+              <stop offset="35%" stopColor="#0F513C" />
+              <stop offset="70%" stopColor="#10B981" />
+              <stop offset="100%" stopColor="#22C55E" />
+            </linearGradient>
+
+            {/* Lush Leaf Gradient */}
+            <linearGradient id={`${uid}-leafGrad`} x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stopColor="#0B3B2C" />
+              <stop offset="60%" stopColor="#16A34A" />
+              <stop offset="100%" stopColor="#34D399" />
+            </linearGradient>
+          </defs>
+
+          {/* 1. Sweeping Gradient Arch */}
+          <path
+            d="M 112 284 C 95 240 88 185 116 132 C 146 76 200 60 250 60 C 302 60 356 80 390 132 C 412 168 414 212 392 252 C 378 276 355 298 328 312 C 352 292 376 265 384 230 C 394 186 384 142 354 104 C 322 66 274 58 238 60 C 188 62 142 86 116 132 C 96 168 96 210 108 248 C 112 264 114 276 112 284 Z"
+            fill={`url(#${uid}-archGrad)`}
+          />
+
+          {/* 2. Leaf Stem Swoosh extending toward right */}
+          <path
+            d="M 390 200 C 405 240 395 290 365 330 C 345 356 315 375 280 382 C 320 372 355 348 375 315 C 398 278 402 232 390 200 Z"
+            fill="#16A34A"
+          />
+
+          {/* 3. Green Leaf Sprouting on the right */}
+          <g transform="translate(390, 190)">
+            <path
+              d="M -8 26 C 8 20 28 8 42 -18 C 42 -18 36 10 18 24 C 0 38 -15 36 -24 32 C -20 28 -14 27 -8 26 Z"
+              fill={`url(#${uid}-leafGrad)`}
+            />
+            <path
+              d="M -8 26 C 2 24 16 18 30 2 C 38 -6 42 -18 42 -18 C 30 -6 18 6 4 14 C -6 20 -8 26 -8 26 Z"
+              fill="#4ADE80"
+              fillOpacity={0.5}
+            />
+          </g>
+
+          {/* 4. Ballot Box Slot Base (Perspective Trapezoid in Website Signature Dark Green #0B3B2C) */}
+          <path
+            d="M 172 218 L 328 218 L 354 256 L 146 256 Z"
+            fill="#FFFFFF"
+            stroke={inverted ? '#34D399' : darkGreen}
+            strokeWidth="16"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+          />
+          {/* Inner Slot Cutout */}
+          <rect
+            x="180"
+            y="230"
+            width="140"
+            height="12"
+            rx="6"
+            fill={inverted ? '#34D399' : darkGreen}
+          />
+
+          {/* 5. Tilted Ballot Paper with Bold Checkmark */}
+          <g transform="rotate(-17 250 180)">
+            {/* White Paper Card with Dark Green Border */}
+            <rect
+              x="198"
+              y="108"
+              width="104"
+              height="128"
+              rx="12"
+              fill="#FFFFFF"
+              stroke={inverted ? '#34D399' : darkGreen}
+              strokeWidth="16"
+              strokeLinejoin="round"
+            />
+            {/* Signature Dark Green Checkmark (✔) */}
+            <path
+              d="M 226 170 L 246 190 L 286 146"
+              fill="none"
+              stroke={inverted ? '#34D399' : darkGreen}
+              strokeWidth="18"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </g>
+        </svg>
+      </div>
+
+      {/* Brand Typography Wordmark: "VoteEase" */}
+      {showText && (
+        <span
+          className={`font-extrabold tracking-tight leading-none ${currentSize.text} ${textClassName}`}
+        >
+          <span className={inverted ? 'text-white' : 'text-slate-900'}>Vote</span>
+          <span className={inverted ? 'text-emerald-300' : 'text-[#0B3B2C]'}>Ease</span>
+        </span>
+      )}
+    </div>
+  );
+};

@@ -1,0 +1,215 @@
+<svg viewBox="0 0 420 460" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Election Administrator with Tablet">
+  <defs>
+    <!-- Background Card Gradients (Warm Light Cream) -->
+    <linearGradient id="adminCardBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FAF7EE" />
+      <stop offset="60%" stop-color="#F4EFE0" />
+      <stop offset="100%" stop-color="#EDE7D4" />
+    </linearGradient>
+
+    <!-- Diagonal Geometric Shapes Gradients -->
+    <linearGradient id="adminDarkShape" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2A5943" />
+      <stop offset="100%" stop-color="#193F2E" />
+    </linearGradient>
+    <linearGradient id="adminSageShape" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D9E6DA" />
+      <stop offset="100%" stop-color="#C5D6C7" />
+    </linearGradient>
+
+    <!-- 3D Skin Gradients -->
+    <radialGradient id="adminSkin" cx="45%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#FEE3CE" />
+      <stop offset="65%" stop-color="#F7C3A4" />
+      <stop offset="100%" stop-color="#E4A381" />
+    </radialGradient>
+    <linearGradient id="adminNeck" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D98A64" />
+      <stop offset="50%" stop-color="#EDB292" />
+      <stop offset="100%" stop-color="#D88963" />
+    </linearGradient>
+    <radialGradient id="adminCheek" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F43F5E" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#F43F5E" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Hair 3D Gradient -->
+    <radialGradient id="adminHair" cx="45%" cy="25%" r="65%">
+      <stop offset="0%" stop-color="#4D423D" />
+      <stop offset="50%" stop-color="#2A2420" />
+      <stop offset="100%" stop-color="#151210" />
+    </radialGradient>
+
+    <!-- Suit & Tie Gradients -->
+    <linearGradient id="adminSuit" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0%" stop-color="#363F4C" />
+      <stop offset="40%" stop-color="#212832" />
+      <stop offset="100%" stop-color="#11151A" />
+    </linearGradient>
+    <linearGradient id="adminTie" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2E694E" />
+      <stop offset="60%" stop-color="#1B4D36" />
+      <stop offset="100%" stop-color="#0B2F1F" />
+    </linearGradient>
+
+    <!-- Tablet Gradients -->
+    <linearGradient id="adminTablet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5D6B7A" />
+      <stop offset="100%" stop-color="#2F3742" />
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="badgeShadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.1" />
+    </filter>
+    <filter id="tabletShadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="-4" dy="10" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.22" />
+    </filter>
+  </defs>
+
+  <!-- CARD BASE (Matching Uploaded Right Card Exactly) -->
+  <rect width="420" height="460" rx="34" fill="url(#adminCardBg)" />
+
+  <!-- Background Layer 1: Dark Green Angular Polygon on Left -->
+  <path d="M-20 180 L160 300 L70 410 L-20 340 Z" fill="url(#adminDarkShape)" opacity="0.9" />
+  <path d="M-20 60 L260 300 L190 370 L-20 200 Z" fill="#ECEFEA" />
+
+  <!-- Background Layer 2: Soft Sage Green Diagonal Band -->
+  <path d="M190 0 L380 180 L290 270 L110 80 Z" fill="url(#adminSageShape)" opacity="0.7" />
+  <path d="M280 230 C340 290 400 350 420 390 L420 460 L240 460 Z" fill="#E8E3D2" opacity="0.6" />
+
+  <!-- FLOATING ANALYTICS BADGE (Upper Right - Matching Uploaded Mockup) -->
+  <g transform="translate(305, 70)" filter="url(#badgeShadow)">
+    <rect width="86" height="86" rx="22" fill="#EFECE0" stroke="#DFD9C6" stroke-width="2" />
+    <!-- 3 Ascending Emerald Green Bar Chart Columns -->
+    <rect x="18" y="46" width="12" height="24" rx="5" fill="#4E8457" />
+    <rect x="37" y="33" width="12" height="37" rx="5" fill="#3A7043" />
+    <rect x="56" y="18" width="12" height="52" rx="5" fill="#204E29" />
+  </g>
+
+  <!-- CHARACTER GROUP -->
+  <g id="admin-character">
+    <!-- Torso: Tailored Charcoal Suit Jacket -->
+    <path d="M85 460 C80 355 105 265 155 230 C185 210 235 212 265 235 C310 270 335 355 330 460 Z" fill="url(#adminSuit)" />
+
+    <!-- Left Shoulder & Arm -->
+    <path d="M260 235 C295 265 320 325 315 390 C310 420 290 440 270 440 C255 440 250 410 255 385 C260 335 250 295 225 270 Z" fill="url(#adminSuit)" />
+
+    <!-- Right Shoulder & Arm -->
+    <path d="M155 230 C125 260 105 315 100 375 C98 405 110 430 130 430 C145 430 150 405 152 380 C155 330 165 290 190 265 Z" fill="url(#adminSuit)" />
+
+    <!-- Crisp White Shirt V-Front & Spread Collar -->
+    <path d="M188 212 L210 282 L232 212 Z" fill="#FFFFFF" />
+    <path d="M184 210 L210 240 L202 212 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
+    <path d="M236 210 L210 240 L218 212 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
+
+    <!-- Silk Forest Green Necktie with 3D Knot -->
+    <path d="M204 222 L216 222 L218 238 L210 242 L202 238 Z" fill="url(#adminTie)" />
+    <path d="M205 238 L215 238 L222 360 L210 375 L198 360 Z" fill="url(#adminTie)" />
+    <path d="M208 242 L212 242 L215 355 L210 365 L208 355 Z" fill="#3D7B5C" opacity="0.4" />
+
+    <!-- Suit Lapels -->
+    <path d="M155 230 L185 310 L175 320 L135 240 Z" fill="#14181F" />
+    <path d="M265 235 L235 310 L245 320 L285 240 Z" fill="#14181F" />
+
+    <!-- Neck with Soft 3D Shadow -->
+    <path d="M194 174 L192 222 C202 232 218 232 228 222 L226 174 Z" fill="url(#adminNeck)" />
+    <path d="M192 176 C202 196 218 196 228 176 Z" fill="#B05C36" opacity="0.4" />
+
+    <!-- HEAD & FACE -->
+    <ellipse cx="210" cy="148" rx="44" ry="52" fill="url(#adminSkin)" />
+
+    <!-- Soft Cheek Blush -->
+    <circle cx="180" cy="164" r="14" fill="url(#adminCheek)" />
+    <circle cx="240" cy="164" r="14" fill="url(#adminCheek)" />
+
+    <!-- Ears -->
+    <ellipse cx="166" cy="152" rx="7.5" ry="13" fill="url(#adminSkin)" />
+    <path d="M166 146 C164 152 166 158 168 156" stroke="#C9764E" stroke-width="2.5" stroke-linecap="round" />
+    <ellipse cx="254" cy="152" rx="7.5" ry="13" fill="url(#adminSkin)" />
+    <path d="M254 146 C256 152 254 158 252 156" stroke="#C9764E" stroke-width="2.5" stroke-linecap="round" />
+
+    <!-- Handsome Eyes (Looking forward-right) -->
+    <g>
+      <!-- Left Eye -->
+      <ellipse cx="192" cy="144" rx="5.5" ry="7" fill="#181513" />
+      <circle cx="194" cy="142" r="2.5" fill="#FFFFFF" />
+      <!-- Left Brow -->
+      <path d="M182 130 C190 126 200 128 203 132" stroke="#18120F" stroke-width="4" stroke-linecap="round" />
+
+      <!-- Right Eye -->
+      <ellipse cx="228" cy="144" rx="5.5" ry="7" fill="#181513" />
+      <circle cx="230" cy="142" r="2.5" fill="#FFFFFF" />
+      <!-- Right Brow -->
+      <path d="M217 132 C220 128 230 126 238 130" stroke="#18120F" stroke-width="4" stroke-linecap="round" />
+    </g>
+
+    <!-- MODERN ROUND BLACK GLASSES (Matching Uploaded Image) -->
+    <!-- Left Lens Frame -->
+    <rect x="174" y="130" width="35" height="33" rx="14" stroke="#16191D" stroke-width="4.5" fill="#E0F2FE" fill-opacity="0.25" />
+    <!-- Right Lens Frame -->
+    <rect x="212" y="130" width="35" height="33" rx="14" stroke="#16191D" stroke-width="4.5" fill="#E0F2FE" fill-opacity="0.25" />
+    <!-- Glasses Bridge -->
+    <path d="M209 142 C210 139 212 139 213 142" stroke="#16191D" stroke-width="4.5" stroke-linecap="round" fill="none" />
+    <!-- Glasses Temple Arms -->
+    <line x1="166" y1="140" x2="174" y2="142" stroke="#16191D" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="247" y1="142" x2="255" y2="140" stroke="#16191D" stroke-width="3.5" stroke-linecap="round" />
+
+    <!-- Cute 3D Nose -->
+    <path d="M210 144 C208 154 209 158 214 158 C217 158 218 156 218 154" stroke="#C26F47" stroke-width="3" stroke-linecap="round" fill="none" />
+
+    <!-- Confident Friendly Smile -->
+    <path d="M198 172 C204 180 216 180 222 172" stroke="#991B1B" stroke-width="3.5" stroke-linecap="round" fill="none" />
+
+    <!-- 3D SIDE-PARTED HAIR (Modern Styled Pompadour / Quiff) -->
+    <path d="M164 144 C160 120 168 96 188 83 C208 70 242 72 260 88 C274 102 275 123 268 142 C262 132 255 120 244 114 C228 106 210 108 196 118 C184 126 174 136 164 144 Z" fill="url(#adminHair)" />
+    <path d="M172 130 C165 106 180 83 205 73 C230 63 255 72 268 88 C262 80 248 73 230 75 C210 78 190 90 180 108 C175 118 172 126 172 130 Z" fill="#4D423D" />
+    <path d="M190 78 C208 66 236 68 256 82 C246 74 228 70 210 73 C200 75 194 78 190 78 Z" fill="#6E5D55" />
+
+    <!-- HANDS & DIGITAL TABLET COMPUTER (Held in front) -->
+    <g transform="rotate(-6 250 330)" filter="url(#tabletShadow)">
+      <!-- Tablet Body -->
+      <rect x="188" y="238" width="132" height="178" rx="15" fill="url(#adminTablet)" stroke="#475569" stroke-width="2.5" />
+      <!-- Tablet Screen (Glass reflection) -->
+      <rect x="194" y="244" width="120" height="166" rx="11" fill="#1E293B" />
+      <path d="M196 246 L312 246 L240 408 L196 408 Z" fill="#334155" opacity="0.28" />
+
+      <!-- Screen UI Bars / Analytics Preview -->
+      <rect x="206" y="258" width="46" height="6" rx="3" fill="#64748B" />
+      <rect x="206" y="272" width="72" height="4" rx="2" fill="#475569" />
+
+      <!-- Mini Chart on Tablet Screen -->
+      <rect x="208" y="350" width="10" height="25" rx="2.5" fill="#10B981" />
+      <rect x="224" y="335" width="10" height="40" rx="2.5" fill="#059669" />
+      <rect x="240" y="320" width="10" height="55" rx="2.5" fill="#047857" />
+      <rect x="256" y="330" width="10" height="45" rx="2.5" fill="#10B981" />
+      <rect x="272" y="315" width="10" height="60" rx="2.5" fill="#059669" />
+    </g>
+
+    <!-- Left Hand Holding Tablet Edge -->
+    <g transform="translate(305, 332)">
+      <ellipse cx="0" cy="0" rx="12" ry="16" fill="url(#adminSkin)" />
+      <rect x="-10" y="-12" width="14" height="6" rx="3" fill="#EDB292" />
+      <rect x="-10" y="-4" width="16" height="6" rx="3" fill="#EDB292" />
+      <rect x="-10" y="4" width="15" height="6" rx="3" fill="#EDB292" />
+      <rect x="-8" y="12" width="13" height="6" rx="3" fill="#EDB292" />
+    </g>
+
+    <!-- Right Arm & Hand Tapping Tablet Screen -->
+    <path d="M150 372 L205 347 C212 344 220 348 224 356 L226 362" stroke="url(#adminSuit)" stroke-width="32" stroke-linecap="round" />
+    <path d="M205 344 L216 340 L222 357 L211 361 Z" fill="#FFFFFF" />
+
+    <!-- Hand & Pointing Index Finger on Glass Screen -->
+    <g transform="translate(235, 327)">
+      <ellipse cx="0" cy="0" rx="14" ry="16" fill="url(#adminSkin)" />
+      <!-- Pointing Index Finger -->
+      <path d="M-4 -8 C0 -18 10 -22 18 -15 C24 -10 20 -2 12 4 L0 8 Z" fill="url(#adminSkin)" />
+      <circle cx="16" cy="-14" r="5" fill="#F8C8A9" />
+      <!-- Curled Fingers -->
+      <ellipse cx="-4" cy="4" rx="8" ry="6" fill="#EDB292" />
+      <ellipse cx="-4" cy="11" rx="7" ry="5.5" fill="#EDB292" />
+      <ellipse cx="-4" cy="17" rx="6" ry="5" fill="#EDB292" />
+      <ellipse cx="-8" cy="-2" rx="7" ry="10" fill="url(#adminSkin)" transform="rotate(20 -8 -2)" />
+    </g>
+  </g>
+</svg>

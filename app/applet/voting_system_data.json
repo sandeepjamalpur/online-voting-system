@@ -1,0 +1,17 @@
+{
+  "admins": [
+    {
+      "id": "admin_1",
+      "fullName": "Prof. Sandeep Jamalpur",
+      "collegeName": "",
+      "username": "admin",
+      "email": "jamalpursandeep41@gmail.com",
+      "password": "admin",
+      "createdAt": "2026-10-02T16:13:36.344Z"
+    }
+  ],
+  "elections": [],
+  "users": [],
+  "candidates": [],
+  "votes": []
+}

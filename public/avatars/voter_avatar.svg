@@ -1,0 +1,304 @@
+<svg viewBox="0 0 440 520" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Student Voter with Ballot">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="cardOuterBg" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#1B4936" />
+      <stop offset="60%" stop-color="#143B2A" />
+      <stop offset="100%" stop-color="#0D271B" />
+    </linearGradient>
+
+    <!-- Diagonal Cream Shape Gradient -->
+    <linearGradient id="creamShape" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F5F0E4" />
+      <stop offset="50%" stop-color="#EDE6D4" />
+      <stop offset="100%" stop-color="#DDD5BF" />
+    </linearGradient>
+
+    <!-- Top Canopy Arc Gradient -->
+    <linearGradient id="canopyArc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#113625" />
+      <stop offset="100%" stop-color="#081E14" />
+    </linearGradient>
+
+    <!-- 3D Pixar Skin Tone Gradients -->
+    <radialGradient id="faceSkin" cx="44%" cy="36%" r="58%">
+      <stop offset="0%" stop-color="#FFE8D6" />
+      <stop offset="45%" stop-color="#FCBF98" />
+      <stop offset="80%" stop-color="#E89B6E" />
+      <stop offset="100%" stop-color="#CF7A4B" />
+    </radialGradient>
+    <radialGradient id="handSkin" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#FFE6D2" />
+      <stop offset="60%" stop-color="#F8B78E" />
+      <stop offset="100%" stop-color="#D68051" />
+    </radialGradient>
+    <linearGradient id="neckShadow" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#B86036" />
+      <stop offset="35%" stop-color="#D97F52" />
+      <stop offset="100%" stop-color="#B35B30" />
+    </linearGradient>
+    <radialGradient id="rosyCheek" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F43F5E" stop-opacity="0.32" />
+      <stop offset="100%" stop-color="#F43F5E" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Volumetric Dark Hair Gradients -->
+    <radialGradient id="hairBase" cx="45%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#3D302A" />
+      <stop offset="55%" stop-color="#241C18" />
+      <stop offset="100%" stop-color="#120D0A" />
+    </radialGradient>
+    <linearGradient id="hairHighlight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#69564B" />
+      <stop offset="60%" stop-color="#382A23" />
+      <stop offset="100%" stop-color="#1B130E" />
+    </linearGradient>
+    <linearGradient id="hairSoftLight" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#80695B" />
+      <stop offset="100%" stop-color="#34261F" />
+    </linearGradient>
+
+    <!-- Emerald Sage Hoodie Gradients -->
+    <linearGradient id="hoodieBody" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0%" stop-color="#6CB381" />
+      <stop offset="35%" stop-color="#559969" />
+      <stop offset="75%" stop-color="#3D7A4F" />
+      <stop offset="100%" stop-color="#295B38" />
+    </linearGradient>
+    <linearGradient id="hoodieArmRight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6EB483" />
+      <stop offset="50%" stop-color="#529465" />
+      <stop offset="100%" stop-color="#2F663F" />
+    </linearGradient>
+    <linearGradient id="hoodieArmLeft" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#64AA78" />
+      <stop offset="55%" stop-color="#4C8B5D" />
+      <stop offset="100%" stop-color="#285936" />
+    </linearGradient>
+    <linearGradient id="hoodieRim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3D7B50" />
+      <stop offset="100%" stop-color="#214E30" />
+    </linearGradient>
+    <linearGradient id="hoodieCrease" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#265834" />
+      <stop offset="100%" stop-color="#173B22" />
+    </linearGradient>
+
+    <!-- Backpack Gradients -->
+    <linearGradient id="backpackStrap" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#333E3B" />
+      <stop offset="40%" stop-color="#222B28" />
+      <stop offset="100%" stop-color="#141918" />
+    </linearGradient>
+    <linearGradient id="backpackBody" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2A3330" />
+      <stop offset="70%" stop-color="#1B2220" />
+      <stop offset="100%" stop-color="#0F1413" />
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="ballotShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="-3" dy="8" stdDeviation="12" flood-color="#061F14" flood-opacity="0.45" />
+    </filter>
+    <filter id="characterShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#072216" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- OUTER CARD FRAME -->
+  <rect width="440" height="520" rx="36" fill="url(#cardOuterBg)" />
+
+  <!-- BACKGROUND ARCHITECTURE -->
+  <!-- Top Right Smooth Canopy Arc -->
+  <path d="M190 0 C280 25 380 90 440 180 L440 0 Z" fill="url(#canopyArc)" opacity="0.9" />
+  <path d="M250 0 C320 20 400 70 440 130 L440 0 Z" fill="#0A2418" opacity="0.6" />
+
+  <!-- Diagonal Warm Cream Card Accent -->
+  <g transform="rotate(-28 230 250)">
+    <rect x="-80" y="110" width="580" height="200" rx="32" fill="url(#creamShape)" opacity="0.92" />
+    <!-- Subtle inset border on cream shape -->
+    <rect x="-78" y="112" width="576" height="196" rx="30" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.5" fill="none" />
+  </g>
+
+  <!-- Deep Green Base Wave Over Cream for seamless transition -->
+  <path d="M0 240 C120 180 260 270 440 220 L440 520 L0 520 Z" fill="#143B2A" opacity="0.45" />
+
+  <!-- CHARACTER ARTWORK -->
+  <g id="voter-character" filter="url(#characterShadow)">
+    
+    <!-- BACKPACK BODY (Peeking behind left torso/shoulder) -->
+    <path d="M295 240 C365 265 395 350 375 460 L325 520 L275 520 Z" fill="url(#backpackBody)" />
+    <!-- Backpack stitch line -->
+    <path d="M315 260 C355 295 365 375 350 445" stroke="#3A4743" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 8" />
+
+    <!-- TORSO & HOODIE BASE -->
+    <path d="M110 520 C100 415 125 305 195 258 C230 236 288 240 322 275 C370 322 392 415 380 520 Z" fill="url(#hoodieBody)" />
+    
+    <!-- Pouch / Front Pocket Seam Subtle Indication -->
+    <path d="M150 470 C200 455 280 455 330 470" stroke="#2B5D3A" stroke-width="6" stroke-linecap="round" opacity="0.6" />
+
+    <!-- LEFT ARM & SHOULDER (Resting naturally down, hand on strap) -->
+    <path d="M312 275 C360 308 388 375 378 450 C372 485 355 515 325 520 C302 520 298 485 306 458 C318 398 300 348 268 318 Z" fill="url(#hoodieArmLeft)" />
+    <!-- Arm shadow fold -->
+    <path d="M315 330 C338 360 342 410 338 460" stroke="#1D4A2B" stroke-width="8" stroke-linecap="round" opacity="0.4" />
+
+    <!-- BACKPACK STRAPS -->
+    <!-- Left Strap (Over chest) -->
+    <path d="M290 262 C318 325 332 425 322 520" stroke="url(#backpackStrap)" stroke-width="26" stroke-linecap="round" />
+    <path d="M290 262 C318 325 332 425 322 520" stroke="#485955" stroke-width="6" stroke-linecap="round" opacity="0.3" />
+    
+    <!-- Right Strap (Over chest) -->
+    <path d="M198 258 C176 312 165 415 168 520" stroke="url(#backpackStrap)" stroke-width="28" stroke-linecap="round" />
+    <path d="M198 258 C176 312 165 415 168 520" stroke="#485955" stroke-width="6" stroke-linecap="round" opacity="0.3" />
+
+    <!-- LEFT HAND GRASPING STRAP -->
+    <g transform="translate(290, 420)">
+      <!-- Main hand palm/knuckle mound -->
+      <ellipse cx="0" cy="0" rx="20" ry="26" fill="url(#handSkin)" transform="rotate(-15)" />
+      <!-- Fingers curled around strap -->
+      <path d="M-14 -12 C-6 -8 6 -8 16 -12" stroke="#B86236" stroke-width="4" stroke-linecap="round" />
+      <path d="M-16 2 C-7 6 7 6 18 2" stroke="#B86236" stroke-width="4" stroke-linecap="round" />
+      <path d="M-14 16 C-6 20 6 20 16 16" stroke="#B86236" stroke-width="3.5" stroke-linecap="round" />
+      <!-- Thumb resting on front -->
+      <path d="M-12 -20 C-18 -10 -16 5 -8 10" stroke="url(#handSkin)" stroke-width="12" stroke-linecap="round" />
+    </g>
+
+    <!-- INNER WHITE T-SHIRT CREWNECK COLLAR -->
+    <path d="M208 238 C210 270 236 282 264 275 C282 270 290 250 292 238 Z" fill="#FFFFFF" />
+    <path d="M214 250 C234 270 268 270 282 250" stroke="#E2E8F0" stroke-width="3.5" fill="none" stroke-linecap="round" />
+
+    <!-- HOODIE COLLAR & HOOD ROLL -->
+    <path d="M188 250 C206 280 234 294 270 290 C306 286 322 268 328 250 C304 276 274 282 246 275 C218 268 200 256 188 250 Z" fill="url(#hoodieRim)" />
+    
+    <!-- WHITE HOODIE DRAWSTRINGS -->
+    <!-- Left Drawstring -->
+    <path d="M228 280 C226 318 224 365 222 388" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" />
+    <!-- Right Drawstring -->
+    <path d="M266 280 C268 318 266 360 263 384" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" />
+    <!-- Aglet Tips -->
+    <rect x="219" y="386" width="6" height="12" rx="3" fill="#E2E8F0" />
+    <rect x="260" y="382" width="6" height="12" rx="3" fill="#E2E8F0" />
+
+    <!-- NECK WITH 3D AMBIENT OCCLUSION SHADOW -->
+    <path d="M222 195 L218 254 C230 268 265 268 278 254 L274 195 Z" fill="url(#neckShadow)" />
+    <path d="M220 200 C238 228 268 228 278 200 Z" fill="#A84C24" opacity="0.65" />
+
+    <!-- HEAD & JAW -->
+    <ellipse cx="250" cy="170" rx="52" ry="60" fill="url(#faceSkin)" />
+
+    <!-- SOFT ROSY CHEEK BLUSH -->
+    <circle cx="210" cy="186" r="18" fill="url(#rosyCheek)" />
+    <circle cx="290" cy="186" r="18" fill="url(#rosyCheek)" />
+
+    <!-- EARS WITH REALISTIC 3D ANATOMY -->
+    <!-- Left Ear -->
+    <ellipse cx="194" cy="174" rx="10" ry="16" fill="url(#faceSkin)" />
+    <path d="M194 168 C192 174 194 180 196 178" stroke="#B86036" stroke-width="3" stroke-linecap="round" />
+    <!-- Right Ear -->
+    <ellipse cx="306" cy="174" rx="10" ry="16" fill="url(#faceSkin)" />
+    <path d="M306 168 C308 174 306 180 304 178" stroke="#B86036" stroke-width="3" stroke-linecap="round" />
+
+    <!-- FACIAL EXPRESSION -->
+    <!-- Left Eye & Brow -->
+    <g id="left-eye">
+      <ellipse cx="225" cy="162" rx="7" ry="9.5" fill="#18110D" />
+      <!-- Primary Catchlight -->
+      <circle cx="228" cy="159" r="3.2" fill="#FFFFFF" />
+      <!-- Secondary Soft Highlight -->
+      <circle cx="223" cy="166" r="1.6" fill="#FFFFFF" opacity="0.85" />
+      <!-- Left Brow (Friendly Arched) -->
+      <path d="M211 146 C222 138 235 141 242 146" stroke="#221814" stroke-width="5.5" stroke-linecap="round" />
+    </g>
+
+    <!-- Right Eye & Brow -->
+    <g id="right-eye">
+      <ellipse cx="275" cy="162" rx="7" ry="9.5" fill="#18110D" />
+      <!-- Primary Catchlight -->
+      <circle cx="278" cy="159" r="3.2" fill="#FFFFFF" />
+      <!-- Secondary Soft Highlight -->
+      <circle cx="273" cy="166" r="1.6" fill="#FFFFFF" opacity="0.85" />
+      <!-- Right Brow (Friendly Arched) -->
+      <path d="M260 146 C268 141 280 138 290 146" stroke="#221814" stroke-width="5.5" stroke-linecap="round" />
+    </g>
+
+    <!-- 3D CUTE NOSE -->
+    <path d="M251 162 C249 175 251 182 257 182 C260 182 262 179 261 177" stroke="#BD5F32" stroke-width="4" stroke-linecap="round" fill="none" />
+    <ellipse cx="254" cy="179" rx="3.5" ry="2" fill="#FFEFE5" opacity="0.6" />
+
+    <!-- JOYFUL SMILE SHOWING TEETH -->
+    <g id="smile">
+      <!-- Deep mouth cavity -->
+      <path d="M232 196 C235 220 270 220 274 196 Z" fill="#881337" />
+      <!-- Curved White Upper Teeth -->
+      <path d="M236 196 C238 206 266 206 269 196 Z" fill="#FFFFFF" />
+      <!-- Upper lip outline -->
+      <path d="M230 196 C238 200 268 200 276 196" stroke="#A84C24" stroke-width="3" stroke-linecap="round" fill="none" />
+    </g>
+
+    <!-- 3D VOLUMETRIC DARK WAVY HAIR (Stylized Pixar Locks) -->
+    <!-- Base Hair Silhouette -->
+    <path d="M192 162 C182 136 194 105 218 90 C242 75 284 78 306 98 C326 116 328 144 318 165 C310 151 302 136 290 130 C270 120 248 124 232 134 C218 143 204 154 192 162 Z" fill="url(#hairBase)" />
+    
+    <!-- Wavy Front Volume Locks -->
+    <path d="M198 148 C188 120 206 92 236 80 C266 68 298 78 316 98 C310 88 292 80 268 82 C242 84 220 96 208 120 C202 133 199 142 198 148 Z" fill="url(#hairHighlight)" />
+    
+    <!-- Top Hair Wave Sweeps -->
+    <path d="M218 85 C242 70 280 72 302 88 C288 78 266 74 244 78 C232 80 224 82 218 85 Z" fill="url(#hairSoftLight)" />
+    <path d="M240 74 C260 63 292 68 310 84 C298 75 278 70 260 72 Z" fill="#998072" opacity="0.6" />
+    <path d="M190 140 C182 152 186 166 194 172 C190 162 190 150 190 140 Z" fill="#241C18" />
+
+    <!-- RIGHT ARM & RAISED FOREARM (Holding up the ballot paper) -->
+    <!-- Upper Arm / Bicep -->
+    <path d="M152 305 L112 400 C106 412 90 406 86 394 L62 322 C55 305 66 288 84 282 L138 265 Z" fill="url(#hoodieArmRight)" />
+    <!-- Forearm bending upward -->
+    <path d="M84 282 L110 210 C114 198 130 192 142 198 L148 202" stroke="url(#hoodieBody)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- RIGHT HAND HOLDING BALLOT -->
+    <g id="raised-hand">
+      <!-- Hand Base -->
+      <ellipse cx="126" cy="190" rx="18" ry="22" fill="url(#handSkin)" transform="rotate(-12 126 190)" />
+      <!-- Fingers Under Ballot -->
+      <ellipse cx="118" cy="180" rx="8" ry="12" fill="#E89B6E" />
+      <ellipse cx="125" cy="176" rx="8" ry="12" fill="#E89B6E" />
+      <ellipse cx="133" cy="177" rx="8" ry="12" fill="#E89B6E" />
+    </g>
+
+    <!-- OFFICIAL BALLOT PAPER WITH SPARKLES (Matching Uploaded Artwork) -->
+    <g id="ballot-paper" transform="rotate(-15 126 190)" filter="url(#ballotShadow)">
+      <!-- Pure White Ballot Sheet with Clean Rounded Corners -->
+      <rect x="42" y="65" width="124" height="160" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2.5" />
+      
+      <!-- Top Text Placeholder Lines -->
+      <rect x="64" y="88" width="64" height="10" rx="5" fill="#94A3B8" />
+      <rect x="64" y="106" width="80" height="8" rx="4" fill="#CBD5E1" />
+
+      <!-- Forest Green Voting Stamp Badge -->
+      <circle cx="104" cy="158" r="32" fill="#135035" />
+      <!-- Inner soft rim for 3D stamp feel -->
+      <circle cx="104" cy="158" r="29" fill="#186141" />
+      
+      <!-- Crisp White Checkmark -->
+      <path d="M92 158 L101 167 L117 148" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+
+      <!-- 3 Dynamic White Sparkle / Action Rays (Top-Right of Ballot) -->
+      <g stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round">
+        <!-- Top Ray -->
+        <path d="M172 45 L182 32" />
+        <!-- Middle Longest Ray -->
+        <path d="M180 62 L198 54" />
+        <!-- Lower Ray -->
+        <path d="M188 78 L206 80" />
+      </g>
+    </g>
+
+    <!-- THUMB & FOREFINGERS GRIPPING THE FRONT OF THE BALLOT -->
+    <g id="front-fingers">
+      <!-- Thumb wrapping over ballot edge -->
+      <ellipse cx="98" cy="202" rx="9" ry="14" fill="url(#faceSkin)" transform="rotate(-15 98 202)" />
+      <ellipse cx="108" cy="200" rx="8.5" ry="13" fill="url(#faceSkin)" transform="rotate(-15 108 200)" />
+      <!-- Subtle nail sheen -->
+      <ellipse cx="98" cy="198" rx="4" ry="5" fill="#FFEAE0" opacity="0.6" />
+    </g>
+
+  </g>
+</svg>

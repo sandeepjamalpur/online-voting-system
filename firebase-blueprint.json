@@ -1,0 +1,120 @@
+{
+  "entities": {
+    "Election": {
+      "title": "Election",
+      "description": "Represents an institution or student council election event",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "adminId": { "type": "string", "maxLength": 128 },
+        "electionName": { "type": "string", "maxLength": 200 },
+        "collegeName": { "type": "string", "maxLength": 200 },
+        "securityCode": { "type": "string", "maxLength": 50 },
+        "positions": { "type": "array" },
+        "electionStatus": { "type": "string", "enum": ["Active", "Closed"] },
+        "scheduledDate": { "type": "string", "maxLength": 30 },
+        "createdAt": { "type": "string", "maxLength": 50 },
+        "description": { "type": "string", "maxLength": 500 }
+      },
+      "required": ["id", "electionName", "collegeName", "securityCode", "electionStatus"]
+    },
+    "Candidate": {
+      "title": "Candidate",
+      "description": "Candidate running for a specific election post",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "electionId": { "type": "string", "maxLength": 128 },
+        "candidateName": { "type": "string", "maxLength": 120 },
+        "position": { "type": "string", "maxLength": 100 },
+        "group": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "enum": ["Active", "Inactive"] },
+        "votesCount": { "type": "number" },
+        "serialNumber": { "type": "number" }
+      },
+      "required": ["id", "electionId", "candidateName", "position"]
+    },
+    "Voter": {
+      "title": "Voter",
+      "description": "Eligible student voter authorized to participate in an election",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "electionId": { "type": "string", "maxLength": 128 },
+        "rollNumber": { "type": "string", "maxLength": 50 },
+        "studentName": { "type": "string", "maxLength": 120 },
+        "hasVoted": { "type": "string", "enum": ["Yes", "No"] },
+        "status": { "type": "string", "enum": ["Active", "Inactive"] },
+        "votedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "electionId", "rollNumber", "hasVoted"]
+    },
+    "Vote": {
+      "title": "Vote",
+      "description": "Encrypted ballot audit record cast by a voter",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "electionId": { "type": "string", "maxLength": 128 },
+        "rollNumber": { "type": "string", "maxLength": 50 },
+        "voteReferenceId": { "type": "string", "maxLength": 60 },
+        "timestamp": { "type": "string", "maxLength": 50 },
+        "date": { "type": "string", "maxLength": 30 },
+        "time": { "type": "string", "maxLength": 30 }
+      },
+      "required": ["id", "electionId", "rollNumber", "voteReferenceId"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Global application and institution metadata",
+      "type": "object",
+      "properties": {
+        "collegeName": { "type": "string", "maxLength": 200 },
+        "electionName": { "type": "string", "maxLength": 200 },
+        "electionStatus": { "type": "string", "enum": ["Active", "Closed"] },
+        "securityCode": { "type": "string", "maxLength": 50 },
+        "operationMode": { "type": "string", "enum": ["live", "sandbox", "kiosk"] },
+        "themeMode": { "type": "string", "enum": ["light", "dark", "system"] },
+        "resultsMode": { "type": "string", "enum": ["live", "sealed"] },
+        "scheduledDate": { "type": "string", "maxLength": 30 }
+      }
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Authorized administrator account",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 150 },
+        "role": { "type": "string", "enum": ["admin", "superadmin"] },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/elections/{electionId}": {
+      "schema": "Election",
+      "description": "Elections created by administrators"
+    },
+    "/elections/{electionId}/candidates/{candidateId}": {
+      "schema": "Candidate",
+      "description": "Candidates competing in an election"
+    },
+    "/elections/{electionId}/voters/{voterId}": {
+      "schema": "Voter",
+      "description": "Voter roll numbers authorized for an election"
+    },
+    "/elections/{electionId}/votes/{voteId}": {
+      "schema": "Vote",
+      "description": "Audit records of cast ballots"
+    },
+    "/settings/{settingsId}": {
+      "schema": "Settings",
+      "description": "Global election configurations"
+    },
+    "/admins/{adminId}": {
+      "schema": "Admin",
+      "description": "System administrators"
+    }
+  }
+}
