@@ -13,8 +13,10 @@ import {
   syncSettingsToFirestore,
 } from './firebaseSync';
 
-const DB_JSON_PATH = path.resolve(process.cwd(), 'voting_system_data.json');
-const DB_XLSX_PATH = path.resolve(process.cwd(), 'voting_database.xlsx');
+const isVercel = Boolean(process.env.VERCEL);
+const DATA_DIR = isVercel ? '/tmp' : process.cwd();
+const DB_JSON_PATH = path.resolve(DATA_DIR, 'voting_system_data.json');
+const DB_XLSX_PATH = path.resolve(DATA_DIR, 'voting_database.xlsx');
 
 export interface AdminRecord {
   id: string;
@@ -161,6 +163,25 @@ export class ExcelDatabase {
   public static async init(): Promise<void> {
     return withLock(async () => {
       try {
+        if (isVercel) {
+          const defaultJsonPath = path.resolve(process.cwd(), 'voting_system_data.json');
+          if (!fs.existsSync(DB_JSON_PATH) && fs.existsSync(defaultJsonPath)) {
+            try {
+              fs.copyFileSync(defaultJsonPath, DB_JSON_PATH);
+            } catch (copyErr) {
+              console.warn('Could not copy initial json to /tmp:', copyErr);
+            }
+          }
+          const defaultXlsxPath = path.resolve(process.cwd(), 'voting_database.xlsx');
+          if (!fs.existsSync(DB_XLSX_PATH) && fs.existsSync(defaultXlsxPath)) {
+            try {
+              fs.copyFileSync(defaultXlsxPath, DB_XLSX_PATH);
+            } catch (copyErr) {
+              console.warn('Could not copy initial xlsx to /tmp:', copyErr);
+            }
+          }
+        }
+
         if (fs.existsSync(DB_JSON_PATH)) {
           const raw = fs.readFileSync(DB_JSON_PATH, 'utf-8');
           dbState = JSON.parse(raw);
@@ -176,8 +197,12 @@ export class ExcelDatabase {
           dbState = createDefaultSeed();
           ExcelDatabase.saveSync();
         }
-        // Also ensure Excel database is written
-        await ExcelDatabase.exportAllToExcelFile();
+        // Also ensure Excel database is written (safe try-catch)
+        try {
+          await ExcelDatabase.exportAllToExcelFile();
+        } catch (excelErr) {
+          console.warn('Could not export initial excel database:', excelErr);
+        }
       } catch (err) {
         console.error('Error initializing database, using seed:', err);
         dbState = createDefaultSeed();
@@ -190,7 +215,7 @@ export class ExcelDatabase {
     try {
       fs.writeFileSync(DB_JSON_PATH, JSON.stringify(dbState, null, 2), 'utf-8');
     } catch (err) {
-      console.error('Error saving database to JSON:', err);
+      console.warn('Warning: Could not save database to JSON (read-only filesystem):', err);
     }
   }
 
@@ -1176,7 +1201,11 @@ export class ExcelDatabase {
   }
 
   public static async exportAllToExcelFile(): Promise<void> {
-    const wb = await ExcelDatabase.exportElectionToExcel();
-    await wb.xlsx.writeFile(DB_XLSX_PATH);
+    try {
+      const wb = await ExcelDatabase.exportElectionToExcel();
+      await wb.xlsx.writeFile(DB_XLSX_PATH);
+    } catch (err) {
+      console.warn('Warning: Could not write excel file to disk (read-only filesystem):', err);
+    }
   }
 }

@@ -48,7 +48,15 @@ export const AdminAuth: React.FC<AdminAuthProps> = ({ onLoginSuccess, onBackToHo
         }),
       });
 
-      const data = await res.json();
+      let data: any = {};
+      const contentType = res.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        data = await res.json();
+      } else {
+        const text = await res.text();
+        throw new Error(text.length < 100 && text ? text : `Server error (${res.status}). Please try again.`);
+      }
+
       if (!res.ok) {
         throw new Error(data.error || 'Login failed. Please check credentials.');
       }
@@ -96,7 +104,15 @@ export const AdminAuth: React.FC<AdminAuthProps> = ({ onLoginSuccess, onBackToHo
         }),
       });
 
-      const data = await res.json();
+      let data: any = {};
+      const contentType = res.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        data = await res.json();
+      } else {
+        const text = await res.text();
+        throw new Error(text.length < 100 && text ? text : `Server error (${res.status}). Please try again.`);
+      }
+
       if (!res.ok) {
         throw new Error(data.error || 'Registration failed.');
       }

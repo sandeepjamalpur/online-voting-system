@@ -1,9 +1,8 @@
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
-import { createServer as createViteServer } from 'vite';
-import { ExcelDatabase } from './server/excelDatabase.js';
-import * as pgDb from './src/db/operations.ts';
+import { ExcelDatabase } from './server/excelDatabase';
+import * as pgDb from './src/db/operations';
 
 export async function createExpressApp() {
   // Initialize Excel & JSON database on server startup
@@ -1005,7 +1004,8 @@ async function startServer() {
   app.use('/avatars', express.static(publicAvatarsPath));
 
   // --- VITE MIDDLEWARE / STATIC ASSETS ---
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
@@ -1024,4 +1024,7 @@ async function startServer() {
   });
 }
 
-startServer();
+// Only start standalone server when run directly (not inside Vercel serverless functions)
+if (!process.env.VERCEL) {
+  startServer();
+}
