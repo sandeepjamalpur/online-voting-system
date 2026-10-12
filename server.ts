@@ -2,13 +2,20 @@ import express from 'express';
 import path from 'path';
 import fs from 'fs';
 import { ExcelDatabase } from './server/excelDatabase';
-import * as pgDb from './src/db/operations';
 
 export async function createExpressApp() {
   // Initialize Excel & JSON database on server startup
   await ExcelDatabase.init();
 
   const app = express();
+
+  // Normalize req.url to ensure it always starts with /api
+  app.use((req, res, next) => {
+    if (!req.url.startsWith('/api')) {
+      req.url = '/api' + (req.url.startsWith('/') ? req.url : '/' + req.url);
+    }
+    next();
+  });
 
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -43,6 +50,14 @@ export async function createExpressApp() {
   // Database Connection Status (Cloud SQL / PostgreSQL)
   app.get('/api/db/status', async (req, res) => {
     try {
+      if (!process.env.SQL_HOST) {
+        return res.json({
+          status: 'not_configured',
+          engine: 'PostgreSQL',
+          message: 'PostgreSQL not configured (running with in-memory/excel database).',
+        });
+      }
+      const pgDb = await import('./src/db/operations');
       const electionList = await pgDb.getElections();
       res.json({
         status: 'connected',
@@ -989,7 +1004,20 @@ export async function createExpressApp() {
 
   // API Fallback 404 Handler - Ensure API routes return JSON errors, never HTML
   app.all('/api/*', (req, res) => {
-    res.status(404).json({ error: `API route not found: ${req.method} ${req.originalUrl}` });
+    res.status(404).json({ error: `API route not found: ${req.method} ${req.originalUrl || req.url}` });
+  });
+
+  // Global Express 404 Handler
+  app.use((req, res) => {
+    res.status(404).json({ error: `Not found: ${req.method} ${req.originalUrl || req.url}` });
+  });
+
+  // Global Error Handler
+  app.use((err: any, req: any, res: any, next: any) => {
+    console.error('[Express Global Error]:', err);
+    if (!res.headersSent) {
+      res.status(500).json({ error: err.message || 'Internal Server Error' });
+    }
   });
 
   return app;

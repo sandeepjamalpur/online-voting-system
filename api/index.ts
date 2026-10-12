@@ -9,13 +9,7 @@ export default async function handler(req: Request, res: Response) {
       appPromise = createExpressApp();
     }
     const app = await appPromise;
-
-    return new Promise((resolve, reject) => {
-      res.on('finish', resolve);
-      res.on('close', resolve);
-      res.on('error', reject);
-      app(req, res);
-    });
+    return app(req, res);
   } catch (err: any) {
     console.error('[Vercel Serverless Function Error]:', err);
     if (!res.headersSent) {

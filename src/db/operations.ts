@@ -1,5 +1,5 @@
 import { eq, and, sql } from 'drizzle-orm';
-import { db } from './index.ts';
+import { db } from './index';
 import {
   admins,
   elections,
@@ -8,7 +8,7 @@ import {
   votes,
   electionSettings,
   users,
-} from './schema.ts';
+} from './schema';
 
 // User / Auth Helpers (Firebase Auth link)
 export async function getOrCreateUser(uid: string, email: string) {

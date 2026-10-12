@@ -197,12 +197,6 @@ export class ExcelDatabase {
           dbState = createDefaultSeed();
           ExcelDatabase.saveSync();
         }
-        // Also ensure Excel database is written (safe try-catch)
-        try {
-          await ExcelDatabase.exportAllToExcelFile();
-        } catch (excelErr) {
-          console.warn('Could not export initial excel database:', excelErr);
-        }
       } catch (err) {
         console.error('Error initializing database, using seed:', err);
         dbState = createDefaultSeed();
@@ -1201,11 +1195,12 @@ export class ExcelDatabase {
   }
 
   public static async exportAllToExcelFile(): Promise<void> {
+    if (isVercel) return;
     try {
       const wb = await ExcelDatabase.exportElectionToExcel();
       await wb.xlsx.writeFile(DB_XLSX_PATH);
     } catch (err) {
-      console.warn('Warning: Could not write excel file to disk (read-only filesystem):', err);
+      console.warn('Warning: Could not write excel file to disk:', err);
     }
   }
 }
