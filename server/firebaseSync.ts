@@ -7,6 +7,8 @@ import {
   collection,
   getDocs,
   deleteDoc,
+  query,
+  where,
   Firestore,
 } from 'firebase/firestore';
 import fs from 'fs';
@@ -242,3 +244,66 @@ export async function fetchAllElectionsFromFirestore(): Promise<any[]> {
     return [];
   }
 }
+
+export async function syncAdminToFirestore(admin: any) {
+  try {
+    const db = initServerFirebase();
+    if (!db || !admin?.id) return;
+    await setDoc(
+      doc(db, 'admins', admin.id),
+      {
+        id: admin.id,
+        fullName: admin.fullName || '',
+        collegeName: admin.collegeName || '',
+        username: (admin.username || '').toLowerCase(),
+        email: (admin.email || '').toLowerCase(),
+        password: admin.password || '', // Stored for simple prototype credential check
+        createdAt: admin.createdAt || new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+      { merge: true }
+    );
+  } catch (err: any) {
+    console.warn('[FirebaseSync] Error syncing admin to Firestore:', err.message);
+  }
+}
+
+export async function fetchAllAdminsFromFirestore(): Promise<any[]> {
+  try {
+    const db = initServerFirebase();
+    if (!db) return [];
+    const snap = await getDocs(collection(db, 'admins'));
+    return snap.docs.map((d) => d.data());
+  } catch (err: any) {
+    console.warn('[FirebaseSync] Could not fetch admins from Firestore:', err.message);
+    return [];
+  }
+}
+
+export async function fetchAdminFromFirestore(identifier: string): Promise<any | null> {
+  try {
+    const db = initServerFirebase();
+    if (!db || !identifier) return null;
+    const cleanIdf = identifier.trim().toLowerCase();
+
+    // 1. Try by doc ID
+    const directDoc = await getDoc(doc(db, 'admins', cleanIdf));
+    if (directDoc.exists()) return directDoc.data();
+
+    // 2. Query by username
+    const usernameQuery = query(collection(db, 'admins'), where('username', '==', cleanIdf));
+    const userSnap = await getDocs(usernameQuery);
+    if (!userSnap.empty) return userSnap.docs[0].data();
+
+    // 3. Query by email
+    const emailQuery = query(collection(db, 'admins'), where('email', '==', cleanIdf));
+    const emailSnap = await getDocs(emailQuery);
+    if (!emailSnap.empty) return emailSnap.docs[0].data();
+
+    return null;
+  } catch (err: any) {
+    console.warn('[FirebaseSync] Could not fetch admin from Firestore:', err.message);
+    return null;
+  }
+}
+

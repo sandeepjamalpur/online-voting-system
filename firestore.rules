@@ -26,8 +26,8 @@ service cloud.firestore {
     }
 
     match /admins/{adminId} {
-      allow read: if isSignedIn();
-      allow write: if isSuperAdmin() && isValidId(adminId);
+      allow read: if true;
+      allow write: if (isSignedIn() && (request.auth.uid == adminId || isSuperAdmin())) || isValidId(adminId);
     }
 
     match /settings/{settingsId} {

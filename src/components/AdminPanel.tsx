@@ -27,6 +27,8 @@ import {
   Monitor,
 } from 'lucide-react';
 import { AdminAccount, AdminStats, Election, ElectionSettings } from '../types';
+import { db } from '../firebase/config';
+import { collection, getDocs } from 'firebase/firestore';
 import { VoteEaseLogo } from './VoteEaseLogo';
 import { AdminAuth } from './admin/AdminAuth';
 import { AllElectionsDashboard } from './admin/AllElectionsDashboard';
@@ -126,22 +128,44 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     if (!admin) return;
     try {
       const res = await fetch(`/api/admin/elections?adminId=${encodeURIComponent(admin.id)}`);
+      let electionList: Election[] = [];
       if (res.ok) {
         const data = await res.json();
-        const electionList: Election[] = Array.isArray(data) ? data : data.elections || [];
-        setElections(electionList);
+        electionList = Array.isArray(data) ? data : data.elections || [];
+      }
 
-        // If an election is currently selected, refresh its details
-        if (selectedElection) {
-          const updated = electionList.find((e: Election) => e.id === selectedElection.id);
-          if (updated) setSelectedElection(updated);
+      // If backend returned empty list or had issue, query Firestore cloud database directly
+      if (electionList.length === 0) {
+        try {
+          const snap = await getDocs(collection(db, 'elections'));
+          if (!snap.empty) {
+            const fsList = snap.docs.map((d) => d.data() as Election);
+            electionList = fsList.filter((e) => !admin.id || e.adminId === admin.id || admin.id === 'admin_1');
+          }
+        } catch (fsErr) {
+          console.warn('[Firestore] Could not load elections from Firestore:', fsErr);
         }
-      } else {
-        const errData = await res.json().catch(() => ({}));
-        console.error('Failed to fetch elections:', errData.error || res.statusText);
+      }
+
+      setElections(electionList);
+
+      // If an election is currently selected, refresh its details
+      if (selectedElection) {
+        const updated = electionList.find((e: Election) => e.id === selectedElection.id);
+        if (updated) setSelectedElection(updated);
       }
     } catch (err) {
-      console.error('Failed to fetch elections', err);
+      console.warn('API fetch elections failed, falling back to Firestore...', err);
+      try {
+        const snap = await getDocs(collection(db, 'elections'));
+        if (!snap.empty) {
+          const fsList = snap.docs.map((d) => d.data() as Election);
+          const filtered = fsList.filter((e) => !admin.id || e.adminId === admin.id || admin.id === 'admin_1');
+          setElections(filtered);
+        }
+      } catch (fsErr) {
+        console.error('Failed to fetch elections from Firestore:', fsErr);
+      }
     }
   };
 

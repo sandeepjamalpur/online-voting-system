@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
+import { getFirestore, doc, getDocFromServer, getDoc, setDoc } from 'firebase/firestore';
 import firebaseConfig from '../../firebase-applet-config.json';
 
 // Initialize Firebase client
@@ -25,9 +25,30 @@ export async function testConnection(): Promise<boolean> {
   }
 }
 
-// Execute connection verification on boot
+export async function ensureDefaultAdminInFirestore(): Promise<void> {
+  try {
+    const adminRef = doc(db, 'admins', 'admin_1');
+    const snap = await getDoc(adminRef);
+    if (!snap.exists()) {
+      await setDoc(adminRef, {
+        id: 'admin_1',
+        fullName: 'Prof. Sandeep Jamalpur',
+        collegeName: '',
+        username: 'admin',
+        email: 'jamalpursandeep41@gmail.com',
+        password: 'admin',
+        createdAt: new Date().toISOString(),
+      });
+    }
+  } catch (err) {
+    console.warn('[Firebase] Default admin check note:', err);
+  }
+}
+
+// Execute connection verification and default admin seeding on boot
 if (typeof window !== 'undefined') {
   testConnection();
+  ensureDefaultAdminInFirestore();
 }
 
 export default app;

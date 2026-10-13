@@ -11,6 +11,10 @@ import {
   clearAllVotersFromFirestore,
   syncVoteToFirestore,
   syncSettingsToFirestore,
+  syncAdminToFirestore,
+  fetchAdminFromFirestore,
+  fetchAllAdminsFromFirestore,
+  fetchAllElectionsFromFirestore,
 } from './firebaseSync';
 
 const isVercel = Boolean(process.env.VERCEL);
@@ -197,6 +201,32 @@ export class ExcelDatabase {
           dbState = createDefaultSeed();
           ExcelDatabase.saveSync();
         }
+
+        // Hydrate admins and elections from Firestore cloud database
+        try {
+          const firestoreAdmins = await fetchAllAdminsFromFirestore();
+          if (firestoreAdmins && firestoreAdmins.length > 0) {
+            const existingIds = new Set(dbState.admins.map((a) => a.id));
+            firestoreAdmins.forEach((fa: any) => {
+              if (!existingIds.has(fa.id)) {
+                dbState.admins.push(fa);
+                existingIds.add(fa.id);
+              }
+            });
+          }
+          const firestoreElections = await fetchAllElectionsFromFirestore();
+          if (firestoreElections && firestoreElections.length > 0) {
+            const existingElIds = new Set(dbState.elections.map((e) => e.id));
+            firestoreElections.forEach((fe: any) => {
+              if (!existingElIds.has(fe.id)) {
+                dbState.elections.push(fe);
+                existingElIds.add(fe.id);
+              }
+            });
+          }
+        } catch (fErr) {
+          console.warn('[FirebaseSync] Could not hydrate from Firestore during init:', fErr);
+        }
       } catch (err) {
         console.error('Error initializing database, using seed:', err);
         dbState = createDefaultSeed();
@@ -259,12 +289,24 @@ export class ExcelDatabase {
 
       dbState.admins.push(newAdmin);
       ExcelDatabase.saveSync();
+      // Sync to Firestore cloud database
+      await syncAdminToFirestore(newAdmin);
       return newAdmin;
     });
   }
 
   public static async authenticateAdmin(usernameOrEmail: string, password: string): Promise<AdminRecord> {
-    const admin = await ExcelDatabase.getAdminByUsernameOrEmail(usernameOrEmail);
+    let admin = await ExcelDatabase.getAdminByUsernameOrEmail(usernameOrEmail);
+    if (!admin) {
+      // Check Firestore cloud database
+      const firestoreAdmin = await fetchAdminFromFirestore(usernameOrEmail);
+      if (firestoreAdmin) {
+        admin = firestoreAdmin;
+        if (!dbState.admins.some((a) => a.id === admin!.id)) {
+          dbState.admins.push(admin);
+        }
+      }
+    }
     if (!admin) {
       throw new Error('No administrator found with that username or email.');
     }
